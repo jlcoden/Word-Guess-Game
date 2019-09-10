@@ -9,6 +9,7 @@
 <body>
 
 <div id="game">
+         <h1>Guess the Popular Disney Movie</h1> 
         <h1>Press Any Key to Get Started!</h1> 
 
                 <!-- Display wins here-->
@@ -34,74 +35,79 @@
     //Array for storing the underscore and correct guesses of word
     var answerArray = []; 
     //Array for storing hangman words to guess
-    var wordArray = ["star wars", "ghost busters"];
+    var wordArray = [ "aladdin","pocahontas","hercules","the lion king", "mulan", "the little mermaid", "the jungle book", "frozen", "snow white", "pinocchio", "moana"];
     
-    // Randomly select a word from the wordArray 
-    var word = wordArray[Math.floor(Math.random() * wordArray.length)];
-
-    //Function to reset the game, setting values back to zero
-    function resetGame() {
+    //Global Variables//
       word = wordArray[Math.floor(Math.random() * wordArray.length)];
       wrongGuesses = [];
       answerArray = []; 
-      allottedGuesses = 11; 
-      startGame(); 
-    }
-    //function to start game 
-    function startGame () {
-        //for loop to go through word length and place underscores 
+      allottedGuesses = 10; 
+    
+    //Function to reset the game and variables back to 0
+     function resetGame() {
+        word = wordArray[Math.floor(Math.random() * wordArray.length)];
+        answerArray = []; 
+        allottedGuesses = 10; 
+        winsCounter = 0; 
+        startGame(); 
+     }
+
+
+    //Function to start game 
+       function startGame () {
+        wrongGuesses = [];
+        //for loop to go through word length and place underscores for length of word
         for (i = 0; i < word.length; i++) {
         answerArray[i] = '_';
         }
+        // display underscores to the answerArray div
+        document.getElementById("currentWord").innerHTML = answerArray.join(" ");
+        checkLetter();
+    }
         
-        checkLetter(); 
-        }
-
       //function to take letter input by player and verify if it is a correct or wrong guess
       function checkLetter() {
-
-          // register player input for letter
+          //Detect user keyboard input 
           document.onkeyup = function(event) {
           letter = event.key.toLowerCase();
+          
       
-        //verify if the letter was an incorrect guess 
-    if (word.indexOf(letter) === -1) {
-        wrongGuesses.push(letter); 
-        lettersWronglyGuessed.innerHTML = wrongGuesses.join(' ');
-        document.getElementById('guessesRemaining').innerHTML = allottedGuesses--
-        checkIfWon();
-
-    } else 
+        //verify if the letter was an incorrect guess  
+      if  (word.indexOf(letter) === -1) {
+          wrongGuesses.push(letter); 
+          lettersWronglyGuessed.innerHTML = wrongGuesses.join(' ');
+          document.getElementById('guessesRemaining').innerHTML = allottedGuesses--
+    } else {
       //if not incorrect check to see if it is a correct letter 
-      for (var i = 0; i <word.length; i++) {
+      for (i = 0; i <word.length; i++) {
             if (word[i] === letter) {
              answerArray[i] = letter; 
-        }
-    } 
+            }
       //if correct join the word to the CurrentWord div and display the letter
       document.getElementById("currentWord").innerHTML = answerArray.join(' ');
-      checkIfWon();
+             }  
 
+          }
+        checkIfWon(); 
     }
   }
-
-    //check to see there are any unscores left in the array, if no more alert the player has won
-    function checkIfWon() {
-  if (answerArray.indexOf('_') === -1) {
-      alert('You Won!');
-      document.getElementById('victories').innerHTML = winsCounter++
-       resetGame(); 
+  //   //check to see there are any unscores left in the array, if no more alert the player has won
+       function checkIfWon() {
+       if (answerArray.indexOf('_') === -1) {
+       alert('You Won!');
+        winsCounter++; 
+        document.getElementById('victories').innerHTML = winsCounter; 
+        resetGame(); 
   
-    //if player runs out of guesse attempts alert that they have lost 
-    } else if (allottedGuesses === 0) {
-      alert('You Lost!');
-      resetGame(); 
-  }
-    };
-
-//start game again 
-startGame();
-
+     //if player runs out of guesse attempts alert that they have lost 
+     } else if (allottedGuesses === -1) {
+        alert('You Lost!');
+        resetGame(); 
+ 
+    } 
+      };
+      
+resetGame();
 </script> 
 
 </body>
