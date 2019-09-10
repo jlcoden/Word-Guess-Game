@@ -1,0 +1,36 @@
+/*Style for body*/
+body {
+    width: 960px; 
+    margin: auto;
+    padding: 0; 
+    background-image: url("../images/disney.jpg");
+    background-repeat: no-repeat;
+    height: auto; 
+  }
+
+  /* Style for game div */
+  #game {
+    width: 550px; 
+    height: 460px; 
+    margin: auto; 
+    background-color: #ffffff;
+    text-align: left;
+    border: solid #cccccc 5px; 
+    margin-top: 90px; 
+    padding: 10px 10px 10px 10px; 
+}
+
+  /* Style for game h1 tag */
+h1 {
+  font-family: 'Georgia', Times, Times New Roman, serif;
+  color: 	#4169E1; 
+  border-bottom: 3px solid #dddddd;
+  margin-bottom: 20px;
+  line-height: 30px;
+  font-size: 30px;
+  padding-bottom: 10px; 
+}
+
+p{
+  font-size: 25px; 
+}
