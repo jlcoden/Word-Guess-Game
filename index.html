@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="game">
+        <h1>Press Any Key to Get Started!</h1> 
+
+                <!-- Display wins here-->
+                <p>Wins: <span id="victories"> 0</span></p>
+            
+                 <!--Display underscore and correc letters for current word here-->
+                <p>Current Word: <span id="currentWord"> </span></p>
+           
+                 <!--Display ammount of guesses remaining-->
+                <p>Guesses Remaining: <span id="guessesRemaining">0</span></p>
+                  <!-- Display the letters wrongly guessed-->
+                <p>You've Guessed: <span id="lettersWronglyGuessed"></span></p>
+
+</div>
+
+<script>
+    //Counter for guesses alloted
+    var allottedGuesses = 10; 
+    //Counter for Wins
+    var winsCounter = 0; 
+    // Array for storing missed guesses
+    var wrongGuesses = [];
+    //Array for storing the underscore and correct guesses of word
+    var answerArray = []; 
+    //Array for storing hangman words to guess
+    var wordArray = ["star wars", "ghost busters"];
+    
+    // Randomly select a word from the wordArray 
+    var word = wordArray[Math.floor(Math.random() * wordArray.length)];
+
+    //Function to reset the game, setting values back to zero
+    function resetGame() {
+      word = wordArray[Math.floor(Math.random() * wordArray.length)];
+      wrongGuesses = [];
+      answerArray = []; 
+      allottedGuesses = 11; 
+      startGame(); 
+    }
+    //function to start game 
+    function startGame () {
+        //for loop to go through word length and place underscores 
+        for (i = 0; i < word.length; i++) {
+        answerArray[i] = '_';
+        }
+        
+        checkLetter(); 
+        }
+
+      //function to take letter input by player and verify if it is a correct or wrong guess
+      function checkLetter() {
+
+          // register player input for letter
+          document.onkeyup = function(event) {
+          letter = event.key.toLowerCase();
+      
+        //verify if the letter was an incorrect guess 
+    if (word.indexOf(letter) === -1) {
+        wrongGuesses.push(letter); 
+        lettersWronglyGuessed.innerHTML = wrongGuesses.join(' ');
+        document.getElementById('guessesRemaining').innerHTML = allottedGuesses--
+        checkIfWon();
+
+    } else 
+      //if not incorrect check to see if it is a correct letter 
+      for (var i = 0; i <word.length; i++) {
+            if (word[i] === letter) {
+             answerArray[i] = letter; 
+        }
+    } 
+      //if correct join the word to the CurrentWord div and display the letter
+      document.getElementById("currentWord").innerHTML = answerArray.join(' ');
+      checkIfWon();
+
+    }
+  }
+
+    //check to see there are any unscores left in the array, if no more alert the player has won
+    function checkIfWon() {
+  if (answerArray.indexOf('_') === -1) {
+      alert('You Won!');
+      document.getElementById('victories').innerHTML = winsCounter++
+       resetGame(); 
+  
+    //if player runs out of guesse attempts alert that they have lost 
+    } else if (allottedGuesses === 0) {
+      alert('You Lost!');
+      resetGame(); 
+  }
+    };
+
+//start game again 
+startGame();
+
+</script> 
+
+</body>
+</html>
