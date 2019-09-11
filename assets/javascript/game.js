@@ -38,12 +38,23 @@
     }
         
       //function to take letter input by player and verify if it is a correct or wrong guess
-      function checkLetter() {
+     function checkLetter() {
+      alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "];
+
           //Detect user keyboard input 
           document.onkeyup = function(event) {
-          letter = event.key.toLowerCase();
-          
-      
+            var letter = event.key;
+
+            for (j = 0; j <alphabet.length; j++) {
+
+              if (letter === alphabet[j]) {
+                console.log("is this working");
+            
+
+            }
+        }
+            // allow letters and whitespaces only.
+           
         //verify if the letter was an incorrect guess  
       if  (word.indexOf(letter) === -1) {
           wrongGuesses.push(letter); 
@@ -63,6 +74,9 @@
         checkIfWon(); 
     }
   }
+
+
+
   //   //check to see there are any unscores left in the array, if no more alert the player has won
        function checkIfWon() {
        if (answerArray.indexOf('_') === -1) {
