@@ -6,6 +6,7 @@ body {
     background-image: url("../images/disney.jpg");
     background-repeat: no-repeat;
     height: auto; 
+    background-color: #7F9ECD; 
   }
 
   /* Style for game div */

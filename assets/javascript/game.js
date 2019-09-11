@@ -21,7 +21,6 @@
         word = wordArray[Math.floor(Math.random() * wordArray.length)];
         answerArray = []; 
         allottedGuesses = 10; 
-        winsCounter = 0; 
         startGame(); 
      }
 
