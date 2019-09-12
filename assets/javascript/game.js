@@ -76,11 +76,12 @@
             }  
 
           }
+          //go to checkIfWon function
         checkIfWon(); 
     }
   }
 
-  //   //check to see there are any unscores left in the array, if no more alert the player has won
+    //check to see there are any unscores left in the array, if no more, alert the player has won
        function checkIfWon() {
        if (answerArray.indexOf('_') === -1) {
        alert('You Won!');
@@ -92,11 +93,11 @@
   
      //if player runs out of guesse attempts alert that they have lost 
      } else if (allottedGuesses === -1) {
-        alert('You Lost!');
+        alert('Sorry, you lost!');
         //reset game to play again 
         resetGame(); 
  
       } 
   };
-      
+//Reset game
 resetGame();
