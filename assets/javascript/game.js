@@ -58,6 +58,8 @@
            
         //verify if the letter was an incorrect guess  
       if  (movie.indexOf(letter) === -1) {
+        letter = event.key.toUpperCase();
+
           wrongGuesses.push(letter); 
          //if incorrect guess join letter to wrongGuesses array 
           lettersWronglyGuessed.innerHTML = wrongGuesses.join(' ');
