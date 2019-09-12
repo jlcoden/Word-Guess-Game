@@ -8,7 +8,7 @@
     //Array for storing the underscore and correct guesses of movie
     var answerArray = []; 
     //Array for storing disney movies to guess
-    var movieArray = [ "aladdin","pocahontas","hercules","the lion king", "mulan", "the little mermaid", "the jungle book", "frozen", "snow white", "pinocchio", "moana"];
+    var movieArray = [ "aladdin","pocahontas","hercules","the lion king", "mulan", "the little mermaid", "frozen", "snow white", "pinocchio", "moana"];
     
     //Global Variables//
       movie = movieArray[Math.floor(Math.random() * movieArray.length)];
