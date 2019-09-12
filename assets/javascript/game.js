@@ -5,37 +5,42 @@
     var winsCounter = 0; 
     // Array for storing missed guesses
     var wrongGuesses = [];
-    //Array for storing the underscore and correct guesses of word
+    //Array for storing the underscore and correct guesses of movie
     var answerArray = []; 
-    //Array for storing hangman words to guess
-    var wordArray = [ "aladdin","pocahontas","hercules","the lion king", "mulan", "the little mermaid", "the jungle book", "frozen", "snow white", "pinocchio", "moana"];
+    //Array for storing disney movies to guess
+    var movieArray = [ "aladdin","pocahontas","hercules","the lion king", "mulan", "the little mermaid", "the jungle book", "frozen", "snow white", "pinocchio", "moana"];
     
     //Global Variables//
-      word = wordArray[Math.floor(Math.random() * wordArray.length)];
+      movie = movieArray[Math.floor(Math.random() * movieArray.length)];
       wrongGuesses = [];
       answerArray = []; 
       allottedGuesses = 10; 
     
-    //Function to reset the game and variables back to 0
-     function resetGame() {
-        word = wordArray[Math.floor(Math.random() * wordArray.length)];
-        answerArray = []; 
-        allottedGuesses = 10; 
-        startGame(); 
-     }
+    //Function to reset the game, shuffle through words, and set variables back to 0
+    function resetGame() {
+    //random shuffle through movieArray 
+    movie = movieArray[Math.floor(Math.random() * movieArray.length)];
+    //set answerArray back to 0
+    answerArray = []; 
+    //set allottedGuesses back to 12
+    allottedGuesses = 12; 
+    //call startGame method
+    startGame(); 
+    }
 
 
     //Function to start game 
-       function startGame () {
+         function startGame () {
+        //array to store letters for wrong guesses 
         wrongGuesses = [];
-        //for loop to go through word length and place underscores for length of word
-        for (i = 0; i < word.length; i++) {
+        //for loop to go through movie length and place underscores for length of movie
+        for (i = 0; i < movie.length; i++) {
         answerArray[i] = '_';
         }
         // display underscores to the answerArray div
-        document.getElementById("currentWord").innerHTML = answerArray.join(" ");
+        document.getElementById("currentmovie").innerHTML = answerArray.join(" ");
         checkLetter();
-    }
+        }
         
       //function to take letter input by player and verify if it is a correct or wrong guess
      function checkLetter() {
@@ -48,49 +53,48 @@
             for (j = 0; j <alphabet.length; j++) {
 
               if (letter === alphabet[j]) {
-                console.log("is this working");
-            
-
             }
         }
-            // allow letters and whitespaces only.
            
         //verify if the letter was an incorrect guess  
-      if  (word.indexOf(letter) === -1) {
+      if  (movie.indexOf(letter) === -1) {
           wrongGuesses.push(letter); 
+         //if incorrect guess join letter to wrongGuesses array 
           lettersWronglyGuessed.innerHTML = wrongGuesses.join(' ');
+          //display number of guesses remaining and decrement allotedGuesses counter
           document.getElementById('guessesRemaining').innerHTML = allottedGuesses--
-    } else {
+       } else {
       //if not incorrect check to see if it is a correct letter 
-      for (i = 0; i <word.length; i++) {
-            if (word[i] === letter) {
-             answerArray[i] = letter; 
+        for (i = 0; i <movie.length; i++) {
+              if (movie[i] === letter) {
+               answerArray[i] = letter; 
             }
-      //if correct join the word to the CurrentWord div and display the letter
-      document.getElementById("currentWord").innerHTML = answerArray.join(' ');
-             }  
+          //if correct join the movie to the Currentmovie div and display the letter
+           document.getElementById("currentmovie").innerHTML = answerArray.join(' ');
+            }  
 
           }
         checkIfWon(); 
     }
   }
 
-
-
   //   //check to see there are any unscores left in the array, if no more alert the player has won
        function checkIfWon() {
        if (answerArray.indexOf('_') === -1) {
        alert('You Won!');
+       //increase wins counter
         winsCounter++; 
+        //show wins counter number in victories html element 
         document.getElementById('victories').innerHTML = winsCounter; 
         resetGame(); 
   
      //if player runs out of guesse attempts alert that they have lost 
      } else if (allottedGuesses === -1) {
         alert('You Lost!');
+        //reset game to play again 
         resetGame(); 
  
-    } 
-      };
+      } 
+  };
       
 resetGame();
