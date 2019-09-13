@@ -1,7 +1,5 @@
-
 //Global Variables//
-    //movie variable 
-    var movie='';
+   
     //Counter for guesses alloted
     var allottedGuesses = 12; 
     //Counter for Wins
@@ -12,6 +10,8 @@
     var answerArray = []; 
     //Array for storing disney movies to guess
     var movieArray = [ "aladdin","pocahontas","hercules","the lion king", "mulan", "the little mermaid", "frozen", "snow white", "pinocchio", "moana"];
+    //movie variable for movies from movieArray 
+    var movie='';
     //variable for keyboard input
     var letter='';
     
@@ -36,7 +36,7 @@ function resetGame() {
   movie = movieArray[Math.floor(Math.random() * movieArray.length)];
   //set answerArray back to 0
   answerArray = []; 
-  
+  wrongGuesses =[];
   //set allottedGuesses back to 12
   allottedGuesses = 12; 
   //call startGame method
@@ -44,7 +44,7 @@ function resetGame() {
   }
 
 
-  //function to take letter input by player and verify if it is a correct or wrong guess
+  //function to take letter input of player and verify if it is a correct or wrong guess
       function checkLetter()
       {  
     //verify if the letter was an incorrect guess  
@@ -61,7 +61,7 @@ function resetGame() {
           if (movie[i] === letter) {
             answerArray[i] = letter; 
         }
-      //if correct join the movie to the Currentmovie div and display the letter
+      //if correct join the movie to the currentMovie span and display the letter
         document.getElementById("currentmovie").innerHTML = answerArray.join(' ');
         }  
 
@@ -70,13 +70,13 @@ function resetGame() {
     checkIfWon(); 
 }
 
-    //check to see there are any unscores left in the array, if no more, alert the player has won
+    //check to see there are any underscores left in the array, if no more, alert the player has won
        function checkIfWon() {
          if (answerArray.indexOf('_') === -1) {
          alert('You Won!');
         //increase wins counter
          winsCounter++; 
-        //show wins counter number in victories html element 
+        //show wins counter number in victories html span 
         document.getElementById('victories').innerHTML = winsCounter; 
         resetGame();
          
@@ -85,7 +85,10 @@ function resetGame() {
      } 
      else if (allottedGuesses === -1) {
         alert('Sorry, you lost!');
+        //set winsCounter to zero
         winsCounter = 0; 
+        //set WrongGuesses array to zero
+        wrongGuesses = 0;
         document.getElementById('victories').innerHTML = winsCounter; 
         //reset game to play again 
         resetGame(); 
@@ -94,8 +97,10 @@ function resetGame() {
   }
 //Reset game
 resetGame();
+//Detect player's input on keyboard
 document.onkeyup = function(event) {
 letter = event.key;
+//run validation, only accept letters and spaces
 if(letter.match(/[a-zA-Z\s]/i)) {
       {
         checkLetter();
